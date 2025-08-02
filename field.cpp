@@ -917,20 +917,20 @@ void field::shuffle(uint8_t playerid, uint8_t location) {
 			return;
 		}
 	}
-	if(location == LOCATION_HAND || !is_flag(DUEL_PSEUDO_SHUFFLE)) {
-		int32_t upper_bound = static_cast<int32_t>(to_shuffle.size());
-		if(location == LOCATION_EXTRA)
-			upper_bound -= player[playerid].extra_p_count;
-		if(upper_bound > 1) {
-			for(int32_t i = 0; i < upper_bound - 1; ++i) {
-				auto r = pduel->get_next_integer(i, upper_bound - 1);
-				auto* t = to_shuffle[i];
-				to_shuffle[i] = to_shuffle[r];
-				to_shuffle[r] = t;
-			}
-			reset_sequence(playerid, location);
-		}
-	}
+	// if(location == LOCATION_HAND || !is_flag(DUEL_PSEUDO_SHUFFLE)) {
+	// 	int32_t upper_bound = static_cast<int32_t>(to_shuffle.size());
+	// 	if(location == LOCATION_EXTRA)
+	// 		upper_bound -= player[playerid].extra_p_count;
+	// 	if(upper_bound > 1) {
+	// 		for(int32_t i = 0; i < upper_bound - 1; ++i) {
+	// 			auto r = pduel->get_next_integer(i, upper_bound - 1);
+	// 			auto* t = to_shuffle[i];
+	// 			to_shuffle[i] = to_shuffle[r];
+	// 			to_shuffle[r] = t;
+	// 		}
+	// 		reset_sequence(playerid, location);
+	// 	}
+	// }
 	if(location == LOCATION_HAND || location == LOCATION_EXTRA) {
 		auto message = pduel->new_message((location == LOCATION_HAND) ? MSG_SHUFFLE_HAND : MSG_SHUFFLE_EXTRA);
 		message->write<uint8_t>(playerid);
